@@ -1,0 +1,40 @@
+name: Auto Upload
+
+on:
+  schedule:
+    # 每天凌晨4点执行 (UTC+8)
+    - cron: '0 20 * * *'
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Run upload script
+        env:
+          API: ${{ secrets.API }}
+        run: node dist/index.cjs
+      
+      - name: Push result.json
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # 克隆目标仓库
+          git clone https://${{ secrets.PAT }}@github.com/KarinJS/files.git temp_repo
+          
+          # 复制并提交result.json
+          cp result.json temp_repo/
+          cd temp_repo
+          git add result.json
+          git commit -m "chore: update result.json [skip ci]"
+          git push 

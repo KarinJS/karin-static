@@ -1,0 +1,12 @@
+[
+    {
+        "type": "image",
+        "name": "karinQQ群",
+        "path": "./static/2025-01-17_qq-group.jpg"
+    },
+    {
+        "type": "font",
+        "name": "HarmonyOS_Sans_SC_Black.ttf",
+        "path": "./static/2025-01-17_HarmonyOS_Sans_SC_Black.ttf"
+    }
+]
