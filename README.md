@@ -7,7 +7,7 @@ https://raw.githubusercontent.com/KarinJS/files/refs/heads/main/result.json
 ## gitee
 
 ```bash
-https://gitee.com/shijinn/files/raw/main/result.json
+https://gitee.com/KarinJS/files/raw/main/result.json
 ```
 
 ## gitcode
