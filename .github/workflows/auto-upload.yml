@@ -30,7 +30,17 @@ jobs:
           API: ${{ secrets.API }}
         run: node dist/index.cjs
       
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [[ -n $(git status -s result.json) ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Push result.json
+        if: steps.check_changes.outputs.changes == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
