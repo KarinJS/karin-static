@@ -4,6 +4,9 @@ on:
   schedule:
     # 每天凌晨4点执行 (UTC+8)
     - cron: '0 20 * * *'
+  push:
+    branches:
+      - master # pr合并到master分支时触发
   workflow_dispatch: # 允许手动触发
 
 jobs:
